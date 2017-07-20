@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!--Copyright 2011-2014 The MathWorks, Inc. -->
+<RTTPackageRepository>
+    <SupportPackage 
+        name="Arduino I/O" 
+        fullname="MATLAB Support Package for Arduino Hardware" 
+        displayname="Arduino"
+        version = "14.1.1" 
+        infotext = "Acquire inputs and send outputs on Arduino Uno, Due and more"
+        infohyperlink = "http://www.mathworks.com/hardware-support/arduino-matlab.html"
+        platform="PCWIN,PCWIN64,MACI64"
+        visible="1"
+        enable="1"
+        baseproduct="MATLAB"
+        basecode="ML_ARDUINO"
+        url="http://www.mathworks.com" 
+        downloadurl=""
+        licenseurl=""
+        folder = "arduinoio" 
+        urlcatalog="urlcatalog_arduinoio.xml"
+        firmwareupdate="arduinoio.setup.arduinoUSBDriverInstall"
+        demoxml="arduinoioexamples/demos.xml"> 
+		<Path name="$(INSTALLDIR)/arduinoio"></Path>
+        <Path name="$(INSTALLDIR)/arduinoio/arduinoioexamples"></Path>
+		<FilesToPackage>
+			<File name="src/samtemplate.mk"></File>
+			<File name="src/avrtemplate.mk"></File>
+			<File name="src/MWArduino.cpp"></File>
+			<File name="src/ArduinoServer.cpp"></File>
+			<File name="arduinoio_ug_book.pdf"></File>
+		</FilesToPackage>
+    <DependsOn name="Arduino Due IDE" version="14.1.0"></DependsOn>
+    </SupportPackage>
+</RTTPackageRepository>

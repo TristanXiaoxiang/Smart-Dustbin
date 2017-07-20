@@ -1,0 +1,209 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Measure Temperature From I2C Device on Arduino&reg; Hardware</title><meta name="generator" content="MATLAB 8.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2014-08-25"><meta name="DC.source" content="I2CTemperatureSensorExample.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Measure Temperature From I2C Device on Arduino&reg; Hardware</h1><!--introduction--><p>This example shows how to use the MATLAB&reg; Support Package for Arduino&reg; Hardware and the I2C interface to communicate with I2C devices.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Overview of TMP102 temperature sensor</a></li><li><a href="#2">Hardware setup</a></li><li><a href="#3">Create an I2C device object</a></li><li><a href="#7">Read temperature value</a></li><li><a href="#8">Read temperature with higher measurement limit</a></li><li><a href="#11">Clean up</a></li></ul></div><h2>Overview of TMP102 temperature sensor<a name="1"></a></h2><p>This example uses TMP102, a two-wire serial output digital sensor, which can read temperature up to a resolution of 0.0625 degree in Celsius. You can also read data from the device in Extended mode with higher measurement limit.</p><h2>Hardware setup<a name="2"></a></h2><p>1) Connect the SDA, SCL, GND and V+ pins of the sensor to the corresponding pins on Arduino hardware. This examples connects SDA and SCL pins to A4 and A5 on Arduino Uno board. If you are using a different board, check the correct pins before connection.</p><p>2) Securely connect the power line of the I2C sensor.</p><p><img vspace="5" hspace="5" src="I2CTemperatureSensorExample_01.png" alt=""> </p><h2>Create an I2C device object<a name="3"></a></h2><p>1) Create an arduino object and include the I2C library.</p><pre class="codeinput">   a = arduino();
+</pre><p>Or, you can explicitly specify it in the Libraries Name-Value pair at creation of arduino object.</p><pre class="language-matlab">a = arduino(<span class="string">'com22'</span>, <span class="string">'uno'</span>, <span class="string">'Libraries'</span>, <span class="string">'I2C'</span>);
+</pre><p>2) Scan for available I2C addresses.</p><pre class="codeinput">   addrs = scanI2CBus(a)
+</pre><pre class="codeoutput">
+addrs = 
+
+    '0x48'
+    '0x60'
+
+</pre><p>Note the address of the temperature sensor. You will use it to create the I2C device object.</p><p>3) Create the I2C device object</p><pre class="codeinput">   tmp102 = i2cdev(a, <span class="string">'0x48'</span>)
+</pre><pre class="codeoutput">
+tmp102 = 
+
+  i2cdev with properties:
+
+       Pins: A4(SDA), A5(SCL)
+        Bus: 0
+    Address: 72 (0x48)
+
+</pre><p>The bus defaults to <tt>0</tt>. If you are using the dedicated I2C interfaces(SDA1, SCL1) on Due board, for example, make sure to set bus to <tt>1</tt>.</p><h2>Read temperature value<a name="7"></a></h2><p>The sensor's temperature reading is digitized into 12 bits in Normal mode with 8 bits in MSB and 4 bits in LSB. Each LSB equals 0.0625 degrees in Celsius. Write the register address to read from first and then read two bytes of data from it. Use <tt>uint8</tt> data type.</p><pre class="codeinput">   write(tmp102, 0, <span class="string">'uint8'</span>);
+   data = read(tmp102, 2, <span class="string">'uint8'</span>);
+   temperature = (double(bitshift(int16(data(1)), 4)) + double(bitshift(int16(data(2)), -4))) * 0.0625
+</pre><pre class="codeoutput">
+temperature =
+
+   23.1875
+
+</pre><h2>Read temperature with higher measurement limit<a name="8"></a></h2><p>With the TMP102 sensor's extended mode, you can measure temperature above 128 degrees by using 13 bits. To do so, you need to write value '60B0' in hex to configuration register at address 1.</p><pre class="codeinput">   writeRegister(tmp102, 1, hex2dec(<span class="string">'60B0'</span>), <span class="string">'uint16'</span>);
+</pre><p>Read the temperature from the register to get a more precise result. The TMP102's conversion rate defaults to 4Hz. Hence, pause MATLAB for about 0.25s before each reading.</p><pre class="codeinput">   pause(0.25);
+   data = readRegister(tmp102, 0, <span class="string">'uint16'</span>);
+   temperature = double(bitshift(bitand(data, hex2dec(<span class="string">'FFF8'</span>)), -3)) * 0.0625
+</pre><pre class="codeoutput">
+temperature =
+
+   23.1875
+
+</pre><p>To change back the default configuration, type</p><pre class="codeinput">   writeRegister(tmp102, 1, hex2dec(<span class="string">'60A0'</span>), <span class="string">'uint16'</span>);
+</pre><h2>Clean up<a name="11"></a></h2><p>Once the connection is no longer needed, clear the associate object.</p><pre class="codeinput">  clear <span class="string">tmp102</span> <span class="string">a</span>
+</pre><p class="footer">Copyright 2014 The MathWorks, Inc.<br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Measure Temperature From I2C Device on Arduino(R) Hardware
+%
+% This example shows how to use the MATLAB(R) Support Package for
+% Arduino(R) Hardware and the I2C interface to communicate with I2C
+% devices.
+ 
+% Copyright 2014 The MathWorks, Inc.
+ 
+ 
+%% Overview of TMP102 temperature sensor
+% This example uses TMP102, a two-wire serial output digital sensor, which
+% can read temperature up to a resolution of 0.0625 degree in Celsius. You
+% can also read data from the device in Extended mode with higher
+% measurement limit.
+%
+
+
+%% Hardware setup 
+% 
+% 1) Connect the SDA, SCL, GND and V+ pins of the sensor to the
+% corresponding pins on Arduino hardware. This examples connects SDA and
+% SCL pins to A4 and A5 on Arduino Uno board. If you are using a different
+% board, check the correct pins before connection.
+%
+% 2) Securely connect the power line of the I2C sensor.
+%
+% <<I2CTemperatureSensorExample_01.png>>
+%
+
+
+%% Create an I2C device object
+%
+% 1) Create an arduino object and include the I2C library. 
+%
+   a = arduino(); 
+%%
+% Or, you can explicitly specify it in the Libraries Name-Value pair at
+% creation of arduino object.
+%
+%   a = arduino('com22', 'uno', 'Libraries', 'I2C');
+%
+% 2) Scan for available I2C addresses.
+%
+   addrs = scanI2CBus(a)
+%%
+% Note the address of the temperature sensor. You will use it to create the
+% I2C device object.
+%
+% 3) Create the I2C device object
+%
+   tmp102 = i2cdev(a, '0x48')
+%%
+% The bus defaults to |0|. If you are using the dedicated I2C
+% interfaces(SDA1, SCL1) on Due board, for example, make sure to set bus to
+% |1|.
+%
+   
+
+%% Read temperature value
+%
+% The sensor's temperature reading is digitized into 12 bits in Normal mode
+% with 8 bits in MSB and 4 bits in LSB. Each LSB equals 0.0625 degrees in
+% Celsius. Write the register address to read from first and then read two
+% bytes of data from it. Use |uint8| data type.
+%
+   write(tmp102, 0, 'uint8');
+   data = read(tmp102, 2, 'uint8');
+   temperature = (double(bitshift(int16(data(1)), 4)) + double(bitshift(int16(data(2)), -4))) * 0.0625
+
+
+%% Read temperature with higher measurement limit
+% With the TMP102 sensor's extended mode, you can measure temperature above
+% 128 degrees by using 13 bits. To do so, you need to write value '60B0' in
+% hex to configuration register at address 1.
+%
+   writeRegister(tmp102, 1, hex2dec('60B0'), 'uint16');
+%%
+% Read the temperature from the register to get a more precise
+% result. The TMP102's conversion rate defaults to 4Hz. Hence, pause MATLAB
+% for about 0.25s before each reading.
+%
+   pause(0.25);
+   data = readRegister(tmp102, 0, 'uint16');
+   temperature = double(bitshift(bitand(data, hex2dec('FFF8')), -3)) * 0.0625
+%%
+% To change back the default configuration, type
+%
+   writeRegister(tmp102, 1, hex2dec('60A0'), 'uint16');
+ 
+
+%% Clean up
+% Once the connection is no longer needed, clear the associate object.
+
+  clear tmp102 a
+
+ 
+displayEndOfDemoMessage(mfilename) 
+ 
+
+##### SOURCE END #####
+--></body></html>

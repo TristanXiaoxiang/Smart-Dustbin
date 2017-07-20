@@ -1,0 +1,260 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Control Motors Using Adafruit&reg; Motor Shield V2</title><meta name="generator" content="MATLAB 8.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2014-08-25"><meta name="DC.source" content="AdafruitMotorShieldV2Example.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Control Motors Using Adafruit&reg; Motor Shield V2</h1><!--introduction--><p>This example shows how to use the MATLAB&reg; Support Package for Arduino&reg; Hardware to control servo motors, DC motors and stepper motors using Adafruit motor shield v2.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Hardware setup</a></li><li><a href="#2">Create shield object</a></li><li><a href="#5">Control servo motor on the shield</a></li><li><a href="#8">Control DC motor on the shield</a></li><li><a href="#11">Control stepper motor on the shield</a></li><li><a href="#13">Clean up</a></li></ul></div><h2>Hardware setup<a name="1"></a></h2><p>1. Attach Adafruit motor shield to your Arduino hardware.</p><p>2. Connect an FS5106B motor to port 1, labeled 'Servo 1' on the shield.</p><p>3. Connect a DC toy/hobby motor to port 1, labeled 'M1' on the shield.</p><p>4. Connect a six-wire Portescap stepper motor to port 1, labeled 'M1' and 'M2' on the shield. Connect the two middle wires on the stepper motor to the center of the port to ground them together. If you are using four-wire or five-wire stepper motor, check your hardware specs for appropriate connections of each wire.</p><p>5. Connect a battery pack that has three AA batteries to the DC jack, labeled with Power and remove the jumper on pins labeled Vin Jumper. This step is optional if your stepper motor does not require a high power supply.</p><p><img vspace="5" hspace="5" src="AdafruitMotorShieldV2Example_01.png" alt=""> </p><h2>Create shield object<a name="2"></a></h2><p>By default, the Adafruit\MotorShieldV2 library is not included in the server code on the board. Create an arduino object and include the Adafruit\MotorShieldV2 library to the hardware.</p><pre class="codeinput">   a = arduino(<span class="string">'com25'</span>, <span class="string">'uno'</span>, <span class="string">'Libraries'</span>, <span class="string">'Adafruit\MotorShieldV2'</span>)
+</pre><pre class="codeoutput">
+a = 
+
+  arduino with properties:
+
+                    Port: 'COM25'
+                   Board: 'Uno'
+     AvailableAnalogPins: [0, 1, 2, 3, 4, 5]
+    AvailableDigitalPins: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+               Libraries: {'Adafruit/MotorShieldV2', 'I2C', 'Servo'}
+
+</pre><p>Create an add-on shield object by specifying the required library name paramter:</p><pre class="codeinput">   shield = addon(a, <span class="string">'Adafruit\MotorShieldV2'</span>)
+</pre><pre class="codeoutput">
+shield = 
+
+  motorshieldv2 with properties:
+
+            Pins: A4(SDA), A5(SCL)
+      I2CAddress: 96 (0x60)
+    PWMFrequency: 1600 (Hz)
+
+</pre><p>The I2CAddress of a shield is set to <tt>0x60</tt> by default if not specified. Search for available I2C addresses on bus 0 to specify a different address.</p><pre class="codeinput">   addrs = scanI2CBus(a,0)
+</pre><pre class="codeoutput">
+addrs = 
+
+    '0x60'
+    '0x70'
+
+</pre><h2>Control servo motor on the shield<a name="5"></a></h2><p>There are two servo motor ports available on each shield. To create a servo motor object at port 1.</p><pre class="codeinput">   s = servo(shield, 1)
+</pre><pre class="codeoutput">
+s = 
+
+  Servo with properties:
+
+         MotorNumber: 1
+                Pins: 10
+    MinPulseDuration: 5.44e-04 (s)
+    MaxPulseDuration: 2.40e-03 (s)
+
+</pre><p>Set the position of the servo motor's shaft to its maximum position.</p><pre class="codeinput">   writePosition(s, 1);
+</pre><p>See <a href="matlab:helpview(fullfile(arduinoio.SPPKGRoot,'arduinoioexamples','html','ServoMotorExample.html'),'-helpbrowser')">Servo Motor Control</a> example to learn how to use a servo object.</p><h2>Control DC motor on the shield<a name="8"></a></h2><p>There are four DC motor ports available on each shield. Create a DC motor object at port 2.</p><pre class="codeinput">   dcm = dcmotor(shield, 2)
+</pre><pre class="codeoutput">
+dcm = 
+
+  dcmotorv2 with properties:
+
+    MotorNumber: 2 (M2)
+          Speed: 0.00           
+      IsRunning: 0              
+
+</pre><p>First, change the motor speed to <tt>0.2</tt>. The sign of the value indicates the direction of the motor rotation that also depends on the wiring of the motor.</p><pre class="codeinput">   dcm.Speed = 0.2;
+</pre><p>Start the motor and change the speed while it is running. Stop the motor when you are done.</p><pre class="codeinput">   start(dcm);
+   dcm.Speed = 0.3;
+   pause(2);
+   dcm.Speed = -0.2;
+   pause(2);
+   stop(dcm);
+</pre><h2>Control stepper motor on the shield<a name="11"></a></h2><p>There are two stepper motor ports available on each shield. To create a stepper motor object at port 2 with 200 steps per revolution.</p><pre class="codeinput">   sm = stepper(shield, 2, 200)
+</pre><pre class="codeoutput">
+sm = 
+
+  stepper with properties:
+
+           MotorNumber: 2              
+    StepsPerRevolution: 200            
+                   RPM: 0              
+              StepType: Single ('Single', 'Double', 'Interleave', 'Microstep')
+
+</pre><p>Set the motor's RPM, e.g revolutions per minute, to 10 and move or step the motor 200 steps in one direction and then another 200 steps in the reverse direction.</p><pre class="codeinput">   sm.RPM = 10;
+   move(sm, 200);
+   pause(2);
+   move(sm, -200);
+   release(sm);
+</pre><h2>Clean up<a name="13"></a></h2><p>Once the connection is no longer needed, clear the associated object.</p><pre class="codeinput">  clear <span class="string">s</span> <span class="string">dcm</span> <span class="string">sm</span> <span class="string">shield</span> <span class="string">a</span>
+</pre><p class="footer">Copyright 2014 The MathWorks, Inc.<br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Control Motors Using Adafruit(R) Motor Shield V2 
+%
+% This example shows how to use the MATLAB(R) Support Package for
+% Arduino(R) Hardware to control servo motors, DC motors and stepper motors
+% using Adafruit motor shield v2.
+ 
+% Copyright 2014 The MathWorks, Inc.
+ 
+ 
+%% Hardware setup
+% 1. Attach Adafruit motor shield to your Arduino hardware.
+% 
+% 2. Connect an FS5106B motor to port 1, labeled 'Servo 1' on
+% the shield.
+%
+% 3. Connect a DC toy/hobby motor to port 1, labeled 'M1' on
+% the shield.
+%
+% 4. Connect a six-wire Portescap stepper motor to port 1, labeled 'M1' and
+% 'M2' on the shield. Connect the two middle wires on the stepper motor to
+% the center of the port to ground them together. If you are using
+% four-wire or five-wire stepper motor, check your hardware specs for
+% appropriate connections of each wire.
+%
+% 5. Connect a battery pack that has three AA batteries to the DC jack,
+% labeled with Power and remove the jumper on pins labeled Vin Jumper. This
+% step is optional if your stepper motor does not require a high power
+% supply.
+%
+% <<AdafruitMotorShieldV2Example_01.png>>
+
+
+%% Create shield object 
+% By default, the Adafruit\MotorShieldV2 library is not included in the
+% server code on the board. Create an arduino object and include the
+% Adafruit\MotorShieldV2 library to the hardware. 
+%
+   a = arduino('com25', 'uno', 'Libraries', 'Adafruit\MotorShieldV2')
+%%
+% Create an add-on shield object by specifying the required library name
+% paramter:
+%
+   shield = addon(a, 'Adafruit\MotorShieldV2')
+%%
+% The I2CAddress of a shield is set to |0x60| by default if not specified.
+% Search for available I2C addresses on bus 0 to specify a different
+% address.
+%
+   addrs = scanI2CBus(a,0)
+ 
+
+%% Control servo motor on the shield
+% There are two servo motor ports available on each shield. To create a
+% servo motor object at port 1.
+%
+   s = servo(shield, 1)
+%%
+% Set the position of the servo motor's shaft to its maximum position.
+%
+   writePosition(s, 1);
+%%
+% See <matlab:helpview(fullfile(arduinoio.SPPKGRoot,'arduinoioexamples','html','ServoMotorExample.html'),'-helpbrowser') Servo Motor Control> example to learn how to use a servo object.
+
+
+%% Control DC motor on the shield
+% There are four DC motor ports available on each shield. Create a DC motor
+% object at port 2.
+%
+   dcm = dcmotor(shield, 2)
+%%
+% First, change the motor speed to |0.2|. The sign of the value indicates
+% the direction of the motor rotation that also depends on the wiring of
+% the motor.
+%
+   dcm.Speed = 0.2;
+%%
+% Start the motor and change the speed while it is running. Stop the motor
+% when you are done.
+%
+   start(dcm);
+   dcm.Speed = 0.3;
+   pause(2);
+   dcm.Speed = -0.2;
+   pause(2);
+   stop(dcm);
+ 
+
+%% Control stepper motor on the shield
+% There are two stepper motor ports available on each shield. To create a
+% stepper motor object at port 2 with 200 steps per revolution.
+%
+   sm = stepper(shield, 2, 200)
+%%
+% Set the motor's RPM, e.g revolutions per minute, to 10 and move or step
+% the motor 200 steps in one direction and then another 200 steps in the
+% reverse direction.
+%
+   sm.RPM = 10;
+   move(sm, 200);
+   pause(2);
+   move(sm, -200);
+   release(sm);
+
+   
+%% Clean up
+% Once the connection is no longer needed, clear the associated object.
+
+  clear s dcm sm shield a
+
+ 
+displayEndOfDemoMessage(mfilename) 
+ 
+
+##### SOURCE END #####
+--></body></html>

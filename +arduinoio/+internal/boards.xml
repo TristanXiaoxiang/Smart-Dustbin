@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Arduino>
+   <Uno>
+      <Protocol>arduino</Protocol>
+      <MemorySize>32256</MemorySize>
+      <BaudRate>115200</BaudRate>
+      <MCU>atmega328p</MCU>
+      <FCPU>16000000</FCPU>
+      <Core>arduino</Core>
+      <Variant>standard</Variant>
+      <VID_PID>'0x2341_0x0001','0x2341_0x0043'</VID_PID>
+      <NumPins>20</NumPins>
+      <PinsDigital>2:13</PinsDigital>
+      <PinsAnalog>14:19</PinsAnalog>
+      <PinsPWM>3 5:6 9:11</PinsPWM>
+      <PinsServo>2:13</PinsServo>
+      <PinsI2C>18:19</PinsI2C>
+      <PinsSPI>10:13</PinsSPI>
+   </Uno>
+   <Mega2560>
+      <Protocol>wiring</Protocol>
+      <MemorySize>258048</MemorySize>
+      <BaudRate>115200</BaudRate>
+      <MCU>atmega2560</MCU>
+      <FCPU>16000000</FCPU>
+      <Core>arduino</Core>
+      <Variant>mega</Variant>
+      <VID_PID>'0x2341_0x0010','0x2341_0x0042'</VID_PID>
+      <NumPins>70</NumPins>
+      <PinsDigital>2:53</PinsDigital>
+      <PinsAnalog>54:69</PinsAnalog>
+      <PinsPWM>2:13 44:46</PinsPWM>
+      <PinsServo>2:49</PinsServo>
+      <PinsI2C>20:21</PinsI2C>
+      <PinsSPI>50:53</PinsSPI>
+   </Mega2560>
+   <Due>
+      <Protocol>sam-ba</Protocol>
+      <MemorySize>524288</MemorySize>
+      <BaudRate/>
+      <MCU>cortex-m3</MCU>
+      <FCPU>84000000</FCPU>
+      <Core>arduino</Core>
+      <Variant>arduino_due_x</Variant>
+      <VID_PID>'0x2341_0x003d','0x2341_0x003e'</VID_PID>
+      <NumPins>66</NumPins>
+      <PinsDigital>2:53</PinsDigital>
+      <PinsAnalog>54:65</PinsAnalog>
+      <PinsPWM>2:13</PinsPWM>
+      <PinsServo>2:61</PinsServo>
+      <PinsI2C>20:21</PinsI2C>
+      <PinsSPI>[]</PinsSPI>
+   </Due>
+</Arduino>

@@ -1,0 +1,174 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Control Servo Motors</title><meta name="generator" content="MATLAB 8.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2014-08-25"><meta name="DC.source" content="ServoMotorExample.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Control Servo Motors</h1><!--introduction--><p>This example shows how to use the MATLAB&reg; Support Package for Arduino&reg; Hardware to control a hobby servo motor.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Hardware setup</a></li><li><a href="#2">Create servo object and calibrate the motor</a></li><li><a href="#5">Write and read Servo position</a></li><li><a href="#6">Clean up</a></li></ul></div><h2>Hardware setup<a name="1"></a></h2><div><ul><li>Connect an FS5106B servo motor to Arduino hardware,</li></ul></div><p>1. Connect the power wire (usually red) to the 5V pin.</p><p>2. Connect the ground wire (usually black) to the ground pin.</p><p>3. Connect the signal wire (usually orange) to digital pin 4.</p><p><img vspace="5" hspace="5" src="ServoMotorExample_01.png" alt=""> </p><h2>Create servo object and calibrate the motor<a name="2"></a></h2><p>Create an arduino object and include the Servo library.</p><pre class="codeinput">   a = arduino();
+</pre><p>Or, you can explicitly specify it in the Libraries Name-Value pair at creation of arduino object.</p><pre class="language-matlab">a = arduino(<span class="string">'com22'</span>, <span class="string">'uno'</span>, <span class="string">'Libraries'</span>, <span class="string">'Servo'</span>);
+</pre><p>Create a Servo object.</p><pre class="codeinput">   s = servo(a, 4)
+</pre><pre class="codeoutput">
+s = 
+
+  Servo with properties:
+
+                Pins: 4
+    MinPulseDuration: 5.44e-04 (s)
+    MaxPulseDuration: 2.40e-03 (s)
+
+</pre><p>Check your servo motor's data sheet pulse width range values to calibrate the motor to rotate in expected range. This example uses 700*10^6 and 2300*10^-6 for the motor to move from 0 to 180 degrees.</p><pre class="codeinput">   clear <span class="string">s</span>;
+   s = servo(a, 4, <span class="string">'MinPulseDuration'</span>, 700*10^-6, <span class="string">'MaxPulseDuration'</span>, 2300*10^-6)
+</pre><pre class="codeoutput">
+s = 
+
+  Servo with properties:
+
+                Pins: 4
+    MinPulseDuration: 7.00e-04 (s)
+    MaxPulseDuration: 2.30e-03 (s)
+
+</pre><h2>Write and read Servo position<a name="5"></a></h2><p>Change the shaft position of the servo motor from 0(minimum) to 1(maximum) with 0.2, e.g 36 degrees, increment. Display the current position each time the position changes.</p><pre class="codeinput">   <span class="keyword">for</span> angle = 0:0.2:1
+       writePosition(s, angle);
+       current_pos = readPosition(s);
+       current_pos = current_pos*180;
+       fprintf(<span class="string">'Current motor position is %d degrees\n'</span>, current_pos);
+       pause(2);
+   <span class="keyword">end</span>
+</pre><pre class="codeoutput">Current motor position is 0 degrees
+Current motor position is 36 degrees
+Current motor position is 72 degrees
+Current motor position is 108 degrees
+Current motor position is 144 degrees
+Current motor position is 180 degrees
+</pre><h2>Clean up<a name="6"></a></h2><p>Once the connection is no longer needed, clear the associate object.</p><pre class="codeinput">  clear <span class="string">s</span> <span class="string">a</span>
+</pre><p class="footer">Copyright 2014 The MathWorks, Inc.<br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Control Servo Motors
+%
+% This example shows how to use the MATLAB(R) Support Package for
+% Arduino(R) Hardware to control a hobby servo motor.
+ 
+% Copyright 2014 The MathWorks, Inc.
+
+
+%% Hardware setup
+% 
+% * Connect an FS5106B servo motor to Arduino hardware,
+%
+% 1. Connect the power wire (usually red) to the 5V pin.
+%
+% 2. Connect the ground wire (usually black) to the ground pin.
+%
+% 3. Connect the signal wire (usually orange) to digital pin 4.
+%
+% <<ServoMotorExample_01.png>>
+
+
+%% Create servo object and calibrate the motor
+% Create an arduino object and include the Servo library. 
+%
+   a = arduino();
+%%
+% Or, you can explicitly specify it in the Libraries Name-Value pair at
+% creation of arduino object.
+%
+%   a = arduino('com22', 'uno', 'Libraries', 'Servo');
+%
+% Create a Servo object.
+%
+   s = servo(a, 4)
+%%
+% Check your servo motor's data sheet pulse width range values to calibrate
+% the motor to rotate in expected range. This example uses 700*10^6 and
+% 2300*10^-6 for the motor to move from 0 to 180 degrees.
+%
+   clear s;
+   s = servo(a, 4, 'MinPulseDuration', 700*10^-6, 'MaxPulseDuration', 2300*10^-6)
+
+   
+%% Write and read Servo position
+% Change the shaft position of the servo motor from 0(minimum) to 1(maximum) with
+% 0.2, e.g 36 degrees, increment. Display the current position each time
+% the position changes.
+%
+   for angle = 0:0.2:1
+       writePosition(s, angle);
+       current_pos = readPosition(s);
+       current_pos = current_pos*180;
+       fprintf('Current motor position is %d degrees\n', current_pos);
+       pause(2);
+   end 
+
+  
+%% Clean up
+% Once the connection is no longer needed, clear the associate object.
+
+  clear s a
+ 
+displayEndOfDemoMessage(mfilename) 
+ 
+
+##### SOURCE END #####
+--></body></html>

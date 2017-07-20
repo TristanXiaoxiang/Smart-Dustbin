@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Copyright 2014 The MathWorks, Inc. -->
+<RTTPackageRepository>
+    <ThirdPartyPackage name="Firmata Library" url="http://firmata.org">
+        <Platform name="all" 
+                  archive="dummy"
+                  predownloadcmd="matlab:arduinoio.setup.preDownloadCheck($(3PINFO))"
+				  downloadcmd="matlab:"
+                  licenseurl="http://www.mathworks.com/supportfiles/roth/License_ArduinoIDE.txt">
+        </Platform>
+    </ThirdPartyPackage>
+    <ThirdPartyPackage name="Adafruit Motor Shield V2 Library" url="http://www.adafruit.com">
+        <Platform name="ALL" version="1" filename="" destdir="$[adafruitmotorshieldv2:destdir]" 
+                  installer="" archive="$[adafruitmotorshieldv2:archive]" 
+                  downloadurl="$[adafruitmotorshieldv2:baseurl]" 
+                  installcmd="matlab:arduinoio.setup.install3PLibraries('$(DOWNLOADDIR)$(FILESEP)$(ARCHIVE)', '$[adafruitmotorshieldv2:foldername]', '$(DESTDIR)')"
+                  removecmd="matlab:arduinoio.setup.uninstall3PLibraries(''$(DESTDIR)'')"
+                  licenseurl="http://www.mathworks.com/supportpackages/license/adamslv2">
+        </Platform>
+    </ThirdPartyPackage>
+</RTTPackageRepository>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2014 The MathWorks, Inc. -->
+<rsccat version="1.0" locale="en_US" product="MATLAB">
+  <message>
+      <entry key="nosave">{0} objects cannot be saved to disk, and will be skipped.</entry>
+	  <entry key="nosparse">{0} objects cannot be placed in sparse arrays.</entry>
+      <entry key="unsupported">Method ''{0}'' is not supported on objects of class ''{1}''.</entry>
+      <entry key="missingFile">Missing file ''{0}''. Open &lt;a href="matlab: hwconnectinstaller.launchInstaller(''SupportPackageFor'', ''Arduino I/O'', ''StartAtStep'', ''SelectPackage'')&quot;&gt;Support Package Installer&lt;/a&gt; to reinstall the MATLAB Support Package for Arduino Hardware.</entry>
+	  <entry key="noWritePermission">No write permission to the current directory. Please change the Current Folder to another location.</entry>
+
+      <entry key="boardNotDetected">Cannot detect Arduino hardware. Make sure original Arduino hardware is properly plugged in. If using unofficial(clone) hardware, specify port and board type. For more information, see &lt;a href="matlab: open(fullfile(arduinoio.SPPKGRoot, ''arduinoio_ug_book.pdf''))&quot;&gt;this user's guide&lt;/a&gt; for additional troubleshooting steps.</entry>
+      <entry key="invalidPort">No Arduino hardware is found on port {0}. If using an official Arduino board, make sure it is plugged in. Otherwise, please specify both port and board type. For more information, see &lt;a href="matlab: open(fullfile(arduinoio.SPPKGRoot, ''arduinoio_ug_book.pdf''))&quot;&gt;this user's guide&lt;/a&gt; for additional troubleshooting steps.</entry>
+      <entry key="failedUpload">Cannot program Arduino board {0} ({1}). Please make sure the board is supported and the port and board type are correct.</entry>
+      <entry key="failedUploadVerbose">Vendor returned error messages:\n{0}</entry>
+      <entry key="openFailed">Failed to open serial port {0} to communicate with Arduino board {1}. Make sure there is no other MATLAB arduino object for this board. For troubleshooting, see Arduino Hardware Troubleshooting.</entry>
+
+      <entry key="noPortFirstTime">Specify port number and board type of the Arduino board to be used.</entry>
+      <entry key="portWithNoBoard">Specify both port number and board type parameters.</entry>
+      <entry key="paramNotInPairs">To use any Name-Value pair, you must first specify both Port and Board values.</entry>
+      <entry key="invalidPortType">Invalid type for port. The type must be a string.</entry>
+      <entry key="invalidPortValue">Invalid value ''{0}'' for port. The value must be specified as ''com*'' on Windows or ''/dev/*'' on Mac and Linux.</entry>    
+      <entry key="invalidParam">Invalid input parameter {0} for arduino function. Valid parameters are ''Board'' and ''Libraries''.</entry>
+      <entry key="missingParamValue">No value was given for parameter {0}.</entry>      
+      <entry key="boardWithNoPort">You must specify both port and board values.</entry>
+      <entry key="invalidBoardType">Invalid type for board. The type must be a string.</entry>
+      <entry key="invalidBoardName">''{0}'' is not recognized as a supported board.\n Possible board values are:\n {1}.</entry>
+      <entry key="invalidLibrariesType">Invalid Libraries type. The type must be an empty string or a string with comma separated list of library names.</entry>
+      <entry key="invalidLibrariesValue">Invalid value ''{0}'' for Libraries. Valid libraries are\n''{1}''.</entry>
+      <entry key="invalidAddonLibraryType">Invalid Library type. The type must be a string.</entry>
+      <entry key="invalidAddonLibraryValue">Invalid Addon Library value ''{0}''. Valid libraries are ''{1}''.</entry>
+      <entry key="noAddonLibraryUploaded">No add-on library has been uploaded to the board. Please clear and recreate the current arduino object to include the appropriate library. To see all available libraries to download, type ''listArduinoLibraries'' in the command window.</entry>
+      <entry key="libraryNotUploaded">Library ''{0}'' has not been uploaded to the board. Please clear the current arduino object and recreate it to include the appropriate library. To see all available libraries to download, type ''listArduinoLibraries'' in the command window.</entry>
+	  <entry key="ambiguousBoardName">The provided board ''{0}'' matched following supported board types ''{1}''. Specify the full board name.</entry>
+      <entry key="missingDependentLibraries">Failed to add library ''{0}''. The library is dependent on the unavailable library ''{1}''.</entry>
+      <entry key="unsupportedArch">Failed to add library ''{0}'' in the server code. The library is not supported on boards with {1} architecture.</entry>
+      
+      <entry key="IDENotInstalled">Arduino IDE has not been installed. Open &lt;a href="matlab: hwconnectinstaller.launchInstaller(''SupportPackageFor'', ''Arduino I/O'', ''StartAtStep'', ''SelectPackage'')&quot;&gt;Support Package Installer&lt;/a&gt; to reinstall MATLAB Support Package for Arduino Hardware.</entry>
+      <entry key="invalidIDEPath">Arduino IDE at folder ''{0}'' has been corrupted. Open &lt;a href="matlab: hwconnectinstaller.launchInstaller(''SupportPackageFor'', ''Arduino I/O'', ''StartAtStep'', ''SelectPackage'')&quot;&gt;Support Package Installer&lt;/a&gt; to reinstall MATLAB Support Package for Arduino Hardware.</entry>
+
+      <entry key="connectionIsLost">The host and client connection is lost. Make sure the board is plugged in and/or recreate arduino and its related objects.</entry>
+
+	  <entry key="invalidPinType">Invalid pin format. Pin number must be a scalar integer.</entry>
+	  <entry key="invalidPinNumber">Invalid digital pin number for the Arduino {0}. Valid digital pin numbers are {1}.</entry>
+	  <entry key="invalidDigitalType">Invalid parameter type. The digital write value must be a logical (true/false), 0, or 1.</entry>
+	  <entry key="invalidDigitalValue">Invalid digital write value. Valid values are 0 or 1.</entry>
+	  <entry key="invalidDoubleTypePos">Invalid parameter type. The {0} value must be a scalar positive numeric double.</entry>
+	  <entry key="invalidDoubleTypeRanged">Invalid parameter type. The {0} value must be a scalar double in the range {1} and {2}.</entry>
+	  <entry key="invalidDoubleValueRanged">Invalid {0} value. The value must be in the range {1} and {2}.</entry>
+	  <entry key="invalidIntTypeRanged">Invalid parameter type. The {0} value must be a scalar integer in the range {1} and {2}.</entry>
+	  <entry key="invalidIntValueRanged">Invalid {0} value. The value must be an integer in the range {1} and {2}.</entry>
+	  <entry key="invalidDoubleTypeRangedUnits">Invalid parameter type. The {0} value must be a scalar double in the range {1} and {2} ({3}).</entry>
+	  <entry key="invalidDoubleValueRangedUnits">Invalid {0} value. The value must be in the range {1} and {2} ({3}).</entry>
+	  
+	  <entry key="invalidPinMode">Invalid {0} PinMode. The PinMode must be a scalar string. Valid PinMode values are:\n{1}.</entry>
+	  <entry key="pinUnsupportedMode">Arduino {0}, {1} pin {2} does not support {3} pin mode.</entry>
+      <entry key="communicationLostI2C">Communication with the board is lost. To recover communication, please check that the I2C device(s) on bus {0} is properly powered and try again. If that does not work, please make sure the board is plugged in and recreate the arduino and its related objects.</entry>
+	  <entry key="reservedI2CPins">Arduino {0}, {1} pins {2}(SDA) and {3}(SCL) are needed for I2C communications. Currently, pin {4} is being used for ''{5}''. To use the I2C bus, clear this pin by configuring it to ''I2C''.</entry>
+	  <entry key="reservedSPIPins">Arduino {0}, {1} pins {2} needed for SPI communications are currently in use. To use SPI, you must first clear these pins by configuring them to ''SPI''.</entry>
+	  <entry key="reservedServoPins">Arduino {0}, {1} pins {2} needed for Servo are currently in use. To use Servo, you must first clear these pins by configuring them to ''Servo''.</entry>
+	  <entry key="maxServos">Maximum limit of {1} servos reached for Arduino {0}.</entry>
+	  <entry key="maxSPIData">SPI writeRead accepts a maximum dataIn limit of 16 for a data precision of ''uint8'', and 8 for a data precision of ''uint16''.</entry>
+	  <entry key="maxI2CData">I2C count for read and write operations have a limit of 16 for a data precision of ''unit8'', and 8 for a data precision of ''uint16''.</entry>
+	  <entry key="invalidBoardBusNumber">Invalid I2C bus number. Valid I2C bus numbers on Arduino {0} are {1}.</entry>
+	  <entry key="permanentlyReservedI2CPins">Arduino {0}, {1} pins {2}(SDA) and {3}(SCL) were permanently reserved for I2C communications by a prior call that required ''I2C'', the pin mode may not be changed.</entry>
+	  <entry key="conflictSPIPinsCS">The digital pin {0} is reserved for SPI({1}), and cannot also be used for chip select.</entry>
+	  <entry key="propertyConflict">On the Arduino {0}, the property ''{1}'' must be the same for all {2} objects.</entry>
+	  <entry key="invalidNVPropertyName">Invalid property name for {0} Name-Value pairs. Valid property names are {1}.</entry>
+	  <entry key="invalidNVPropertyValue">Invalid value for {0} {1} Name-Value pair. Valid values are {2}.</entry>
+	  <entry key="maxAddonLimit">You have reached max limit of {0} on {1} addons for Arduino {2}.</entry>
+	  
+	  <entry key="invalidPin">Invalid pin number. Valid {1} pin numbers for the Arduino {0} are {2}.</entry>
+	  <entry key="reservedDigitalPin">Digital pin {0} was previously configured for ''{1}''. To complete this operation, use ''configureDigitalPin'' with mode ''{2}'', or ''Unset'' to allow arduino to automatically set the pin mode.</entry>
+	  <entry key="reservedAnalogPin">Analog pin {0} was previously configured for ''{1}''. To complete this operation, use ''configureAnalogPin'' with mode ''{2}'', or ''Unset'' to allow arduino to automatically set the pin mode to the appropriate configuration the next time the pin is used.</entry>
+	  <entry key="reservedResource">{0} pin {1} is reserved by {2} in ''{3}'' mode. To change the pin configuration, clear all variables holding onto this resource.</entry>
+	  <entry key="reservedResourceDigital">{0} pin {1} is reserved by your arduino object in {2} mode. Use configureDigitalPin to change the pin configuration appropriately, or configure it to ''Unset'' to allow arduino to automatically set it.</entry>
+	  <entry key="reservedResourceAnalog">{0} pin {1} is reserved by your arduino object in {2} mode. Use configureAnalogPin to change the pin configuration appropriately, or configure it to ''Unset'' to allow arduino to automatically set it.</entry>
+	  <entry key="invalidMinMaxPulseDurations">The servo MaxPulseDuration must be greater than the MinPulseDuration.</entry>
+	  <entry key="requiredBothMinMaxPulseDurations">The Servo device requires specification of both the MinPulseDuration and MaxPulseDuration Name-Value pairs.</entry>
+      
+	  <entry key="invalidI2CAddress">Invalid I2C address ''{0}''. The address must be a scalar integer (or hex string) in the range {1} to {2}.</entry>
+	  <entry key="invalidI2CAddressType">Invalid I2C address format. The address must be a scalar integer (or hex string) in the range 0 to 127.</entry>
+	  <entry key="conflictI2CAddress">I2C address ''{0} (0x{1})'' already in use.</entry>
+	  <entry key="unsuccessfulI2CRead">Failed to read {0} {1} value(s) from the device.</entry>
+      <entry key="unsuccessfulI2CReadRegister">Failed to read {0} values from register {1}.</entry>
+      <entry key="invalidPrecision">Invalid precision. Valid precision values are {0}.</entry>
+
+	  <!-- User Messages -->
+	  <entry key="programmingArduino">Updating server code on Arduino {0} ({1}). Please wait.</entry>
+	  
+	  <!-- Adafruit -->
+	  <entry key="conflictDCMotor">AdafruitMotorShieldV2\\\\DCMotor ''M{0}'' is already in use.</entry>
+	  <entry key="conflictStepperMotor">AdafruitMotorShieldV2\\\\Stepper Motor ''{0}'' is already in use.</entry>
+	  <entry key="conflictStepperTerminals">AdafruitMotorShieldV2\\\\DCMotor terminals ''M{0}'' and ''M{1}'' needed for Stepper Motor ''{2}'' may be in use by DC Motor.</entry>
+	  <entry key="conflictDCMotorTerminals">AdafruitMotorShieldV2\\\\DCMotor terminals ''M{0}'' and ''M{1}'' may be in use by Stepper Motor ''{2}''.</entry>
+	  
+      <!-- Internal Errors -->
+      <entry key="notSupportedMethod">Internal error: Method ''{0}'' is not supported by the ''{1}'' protocol.</entry>
+      <entry key="invalidServerInitResponse">Internal error: Fails to receive expected number of characters or received incorrect characters.</entry>
+      <entry key="incorrectServerInitialization">Internal error: The initialization of the server code is incorrect.</entry>
+	  <entry key="dcmotorAlreadyRunning">DC Motor {0} is already running.</entry>
+      <entry key="notImplemented">Internal Error:  A function has been called that is not implemented.</entry>
+	  <entry key="errorMessageParamNotString">Internal Error: Attempt to generate localized message with non string parameter.</entry>
+  </message>
+</rsccat>

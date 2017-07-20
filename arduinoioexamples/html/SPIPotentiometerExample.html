@@ -1,0 +1,172 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Communicate with SPI Device on Arduino&reg; Hardware</title><meta name="generator" content="MATLAB 8.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2014-08-25"><meta name="DC.source" content="SPIPotentiometerExample.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Communicate with SPI Device on Arduino&reg; Hardware</h1><!--introduction--><p>This example shows how to use the MATLAB&reg; Support Package for Arduino&reg; Hardware to use SPI interface to communicate with MCP42010 Digital Potentiometer.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Overview of MCP42010 Digital Potentiometer</a></li><li><a href="#2">Hardware setup</a></li><li><a href="#3">Control the digital potentiometer</a></li><li><a href="#7">Clean up</a></li></ul></div><h2>Overview of MCP42010 Digital Potentiometer<a name="1"></a></h2><p>The MCP42010 device is a 256-position 10KOhm potentiometer SPI device with two independent channels.</p><p>It has channel 1 on pin 5(PB1), 6(PW1) and 7(PA1), and also channel 0 on pin 10(PB0), 9(PW0), 8(PA0). Pin 6 and pin 9 are wiper pins. This example uses CS, SCK, SI, SO, VDD, VSS, PB1, PW1 and PA1.</p><h2>Hardware setup<a name="2"></a></h2><p>1) Connect the SI, SO, SCK, CS, VDD and VSS pins of a MCP42010 10KOhm digital potentiometer to the Arduino hardware. This example uses an Arduino Uno board with the following connection.</p><div><ul><li>SI(MOSI)  - digital pin 11</li><li>SO(MISO)  - digital pin 12</li><li>SCK       -  digital pin 13</li><li>CS        - digital pin 10</li><li>VDD       - 5V</li><li>VSS       - GND</li></ul></div><p>If you are using a different board, make sure you connect to the correct pins.</p><p>2) Connect a multimeter to PA1 and PW1 to measure the resistance.</p><p><img vspace="5" hspace="5" src="SPIPotentiometerExample_01.png" alt=""> </p><h2>Control the digital potentiometer<a name="3"></a></h2><p>Create an arduino object and include the SPI library.</p><pre class="codeinput">   a = arduino();
+</pre><p>Or, you can explicitly specify it in the Libraries Name-Value pair at creation of arduino object.</p><pre class="language-matlab">a = arduino(<span class="string">'com22'</span>, <span class="string">'uno'</span>, <span class="string">'Libraries'</span>, <span class="string">'SPI'</span>);
+</pre><p>Create an spidev object and specify the pin number for chip select.</p><pre class="codeinput">   d_pot = spidev(a, 10);
+</pre><p>Send two bytes of data to change the resistance. Since we are controlling channel 1, the first byte should be 0b00010010 which is 12 in hex. The second byte is the new register data in the range of 0 and 255. The following commands change the resistance of the potentiometer gradually.</p><pre class="codeinput">   Rab = 10*1000;
+   Rw = 52;     <span class="comment">% actual wiper resistance</span>
+   <span class="keyword">for</span> regVal = 0:50:250
+       pot_resistance = Rab*regVal/256+Rw;
+       writeRead(d_pot, [hex2dec(<span class="string">'12'</span>), regVal], <span class="string">'uint8'</span>);
+       fprintf(<span class="string">'Current resistance is %d Ohm\n'</span>, pot_resistance);
+       pause(2);
+   <span class="keyword">end</span>
+</pre><pre class="codeoutput">Current resistance is 52 Ohm
+Current resistance is 2.005125e+03 Ohm
+Current resistance is 3.958250e+03 Ohm
+Current resistance is 5.911375e+03 Ohm
+Current resistance is 7.864500e+03 Ohm
+Current resistance is 9.817625e+03 Ohm
+</pre><p>The code runs and displays the readings of the potentiometer.</p><h2>Clean up<a name="7"></a></h2><p>Once the connection is no longer needed, clear the associate object.</p><pre class="codeinput">  clear <span class="string">d_pot</span> <span class="string">a</span>
+</pre><p class="footer">Copyright 2014 The MathWorks, Inc.<br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Communicate with SPI Device on Arduino(R) Hardware
+%
+% This example shows how to use the MATLAB(R) Support Package for
+% Arduino(R) Hardware to use SPI interface to communicate with MCP42010
+% Digital Potentiometer.
+ 
+% Copyright 2014 The MathWorks, Inc.
+ 
+
+%% Overview of MCP42010 Digital Potentiometer
+% The MCP42010 device is a 256-position 10KOhm potentiometer SPI device
+% with two independent channels.
+%
+% It has channel 1 on pin 5(PB1), 6(PW1) and 7(PA1), and also channel 0 on
+% pin 10(PB0), 9(PW0), 8(PA0). Pin 6 and pin 9 are wiper pins. This example
+% uses CS, SCK, SI, SO, VDD, VSS, PB1, PW1 and PA1.
+
+
+%% Hardware setup
+% 
+% 1) Connect the SI, SO, SCK, CS, VDD and VSS pins of
+% a MCP42010 10KOhm digital potentiometer to the Arduino hardware. This
+% example uses an Arduino Uno board with the following connection.
+%
+% * SI(MOSI)  - digital pin 11
+% * SO(MISO)  - digital pin 12
+% * SCK       -  digital pin 13
+% * CS        - digital pin 10
+% * VDD       - 5V
+% * VSS       - GND
+%
+% If you are using a different board, make sure you connect to the correct
+% pins.
+%
+% 2) Connect a multimeter to PA1 and PW1 to measure the resistance. 
+%
+% <<SPIPotentiometerExample_01.png>>
+%
+
+
+%% Control the digital potentiometer
+%
+% Create an arduino object and include the SPI library. 
+%
+   a = arduino(); 
+%%
+% Or, you can explicitly specify it in the Libraries Name-Value pair at
+% creation of arduino object.
+%
+%   a = arduino('com22', 'uno', 'Libraries', 'SPI');
+%
+% Create an spidev object and specify the pin number for chip select.
+%
+   d_pot = spidev(a, 10);
+%%
+% Send two bytes of data to change the resistance. Since we are controlling
+% channel 1, the first byte should be 0b00010010 which is 12 in hex. The
+% second byte is the new register data in the range of 0 and 255. The
+% following commands change the resistance of the potentiometer gradually.
+%
+   Rab = 10*1000;
+   Rw = 52;     % actual wiper resistance
+   for regVal = 0:50:250
+       pot_resistance = Rab*regVal/256+Rw; 
+       writeRead(d_pot, [hex2dec('12'), regVal], 'uint8');
+       fprintf('Current resistance is %d Ohm\n', pot_resistance);
+       pause(2);
+   end
+%%
+% The code runs and displays the readings of the potentiometer. 
+%
+
+
+%% Clean up
+% Once the connection is no longer needed, clear the associate object.
+
+  clear d_pot a
+
+ 
+displayEndOfDemoMessage(mfilename) 
+ 
+
+##### SOURCE END #####
+--></body></html>

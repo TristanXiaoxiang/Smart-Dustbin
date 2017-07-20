@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--    -->
+<!-- Copyright 2012-2014 The MathWorks, Inc. -->
+<demos>
+    <name>MATLAB Support Package for Arduino Hardware</name>
+    <type>matlab</type>
+    <icon>HelpIcon.DEMOS</icon>
+    <description isCdata="no">
+        <p>MATLAB&#174; lets you communicate with Arduino&#174; hardware. With this capability, you can use Arduino hardware as a physical I/O device.</p>
+    </description>
+    <website>
+        <a href="http://www.mathworks.com/hardware-support/arduino-matlab.html">Product page at mathworks.com&#032;</a>
+        <a href="http://www.mathworks.com/hardware-support/arduino-matlab.html"><img src="html/demo_arrow.png" border="none" alt="arrow" align="middle"></img></a>
+    </website>
+    <demosection>
+        <label>Tutorials</label>
+        <demoitem>
+            <label>Getting Started with MATLAB Support Package for Arduino Hardware</label>
+            <type>M-file</type>
+            <source>ArduinoGettingStartedExample</source>
+            <file>html/ArduinoGettingStartedExample.html</file>
+        </demoitem>
+        <demoitem>
+            <label>Control Servo Motors</label>
+            <type>M-file</type>
+            <source>ServoMotorExample</source>
+            <file>html/ServoMotorExample.html</file>
+        </demoitem>
+        <demoitem>
+            <label>Measure Temperature From I2C Device on Arduino Hardware</label>
+            <type>M-file</type>
+            <source>I2CTemperatureSensorExample</source>
+            <file>html/I2CTemperatureSensorExample.html</file>
+        </demoitem>
+        <demoitem>
+            <label>Communicate with SPI Device on Arduino Hardware</label>
+            <type>M-file</type>
+            <source>SPIPotentiometerExample</source>
+            <file>html/SPIPotentiometerExample.html</file>
+        </demoitem>
+        <demoitem>
+            <label>Control Motors Using Adafruit Motor Shield V2</label>
+            <type>M-file</type>
+            <source>AdafruitMotorShieldV2Example</source>
+            <file>html/AdafruitMotorShieldV2Example.html</file>
+        </demoitem>
+    </demosection>  
+</demos>
+
+<!-- LocalWords:  Arduino arduinoio gettingstarted
+-->
+

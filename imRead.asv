@@ -1,0 +1,9 @@
+images=ones(240,320,30);
+cut=[41,1,239,239];
+for i=1:30
+   % x=strcat('im000',num2str(i));
+   image=imread(['image/im000',num2str(i),'.jpg']);
+    %image=imread('image/im0001.jpg');
+    image= rgb2gray(image);
+    images(:,:,i)=image;
+end
